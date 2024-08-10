@@ -160,7 +160,7 @@ function SearchPage() {
         <button
           type="button"
           onClick={next}
-          hidden={reponseNumber <= limit}
+          hidden={reponseNumber <= limit + offset}
           className="buttonNextPrev"
         >
           <img className="buttonImg" src={BtnNext} alt="bouton suivant" />
