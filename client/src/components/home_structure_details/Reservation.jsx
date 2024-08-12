@@ -67,18 +67,15 @@ function Reservation({ priceday, auth, structures }) {
     try {
       const data = [];
       let count = 0;
-      for (let i = 0; i < animalData.length; i += 1) {
-        if (selectedAnimals.includes(animalData[i].id) === true) {
-          data[count] = {
-            reservation_date_beginning:
-              dayjs(startingDate).format("YYYY-MM-DD"),
-            reservation_date_end: dayjs(endingDate).format("YYYY-MM-DD"),
-            home_structure_id: structures.id,
-            animal_id: animalData[i].id,
-            priceday,
-          };
-          count += 1;
-        }
+      for (let i = 0; i < selectedAnimals.length; i += 1) {
+        data[count] = {
+          reservation_date_beginning: dayjs(startingDate).format("YYYY-MM-DD"),
+          reservation_date_end: dayjs(endingDate).format("YYYY-MM-DD"),
+          home_structure_id: structures.id,
+          animal_id: selectedAnimals[i],
+          priceday,
+        };
+        count += 1;
       }
       const response = await fetch(`${URL}reservation`, {
         method: "POST",
