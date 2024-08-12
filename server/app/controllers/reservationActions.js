@@ -18,7 +18,7 @@ const add = async (req, res, next) => {
     // Insert the user into the database
     const insertId = await tables.reservation.create(reservations);
     req.reservation_id = insertId;
-    res.status(201).json({ insertId });
+    res.sendStatus(201);
     next();
   } catch (err) {
     // Pass any errors to the error-handling middleware
