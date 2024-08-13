@@ -67,18 +67,15 @@ function Reservation({ priceday, auth, structures }) {
     try {
       const data = [];
       let count = 0;
-      for (let i = 0; i < animalData.length; i += 1) {
-        if (selectedAnimals.includes(animalData[i].id) === true) {
-          data[count] = {
-            reservation_date_beginning:
-              dayjs(startingDate).format("YYYY-MM-DD"),
-            reservation_date_end: dayjs(endingDate).format("YYYY-MM-DD"),
-            home_structure_id: structures.id,
-            animal_id: animalData[i].id,
-            priceday,
-          };
-          count += 1;
-        }
+      for (let i = 0; i < selectedAnimals.length; i += 1) {
+        data[count] = {
+          reservation_date_beginning: dayjs(startingDate).format("YYYY-MM-DD"),
+          reservation_date_end: dayjs(endingDate).format("YYYY-MM-DD"),
+          home_structure_id: structures.id,
+          animal_id: selectedAnimals[i],
+          priceday,
+        };
+        count += 1;
       }
       const response = await fetch(`${URL}reservation`, {
         method: "POST",
@@ -113,7 +110,7 @@ function Reservation({ priceday, auth, structures }) {
     <section id="reservation">
       <form method="post" onSubmit={handleReservation} id="reservationForm">
         <div id="userChoice">
-          <h2 id="totalPrice">TOTAL {price} €</h2>
+          <p id="totalPrice">TOTAL {price} €</p>
 
           {auth !== null &&
           (auth === false || auth.user.hasAnimals === false) ? (
@@ -121,12 +118,15 @@ function Reservation({ priceday, auth, structures }) {
               <p id="authDenied">
                 Vous devez avoir au moins un animal enregistré pour réserver
               </p>
-              {(auth === false) ? (
+              {auth === false ? (
                 <Link to="/connexion" id="deniedLink">
                   Me Connecter
                 </Link>
               ) : (
-                <Link to={`/formulaire-animal/${auth.user.sub}`} id="deniedLink">
+                <Link
+                  to={`/formulaire-animal/${auth.user.sub}`}
+                  id="deniedLink"
+                >
                   Ajouter un animal
                 </Link>
               )}
@@ -187,7 +187,8 @@ function Reservation({ priceday, auth, structures }) {
         <h3>Détails</h3>
         <hr id="detailsLine" />
         <p>
-          {priceday} € / jour(s) x {datediff} jour(s) x {selectedAnimals.length} animaux
+          {priceday} € / jour(s) x {datediff} jour(s) x {selectedAnimals.length}{" "}
+          animaux
         </p>
       </div>
     </section>
@@ -201,10 +202,13 @@ Reservation.propTypes = {
       hasAnimals: PropTypes.bool.isRequired,
       sub: PropTypes.number.isRequired,
     }).isRequired,
-  }).isRequired,
+  }),
   structures: PropTypes.shape({
     id: PropTypes.number.isRequired,
   }).isRequired,
+};
+Reservation.defaultProps = {
+  auth: null,
 };
 
 export default Reservation;

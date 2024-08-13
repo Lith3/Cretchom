@@ -14,11 +14,12 @@ const read = async (req, res, next) => {
 const add = async (req, res, next) => {
   // Extract the user data from the request body
   const reservations = req.body;
+
   try {
     // Insert the user into the database
     const insertId = await tables.reservation.create(reservations);
     req.reservation_id = insertId;
-    res.status(201).json({ insertId });
+    res.sendStatus(201);
     next();
   } catch (err) {
     // Pass any errors to the error-handling middleware
@@ -26,7 +27,7 @@ const add = async (req, res, next) => {
   }
 };
 // Reads reservations received as a home structure
-const received = async (req, res, next) => {
+const readReceived = async (req, res, next) => {
   try {
     const userId = req.user;
     const reservations = await tables.reservation.readReceived(userId);
@@ -68,6 +69,6 @@ const edit = async (req, res, next) => {
 module.exports = {
   read,
   add,
-  received,
+  readReceived,
   edit,
 };
