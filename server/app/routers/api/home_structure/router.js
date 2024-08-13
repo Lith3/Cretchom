@@ -34,7 +34,7 @@ router.get("/", browse);
 // Route to get a specific user and home_structure by ID
 router.get("/single/:id", read);
 
-// Route to get a specific home_structure by ID
+// Route to get a specific home_structure and user by ID
 router.get("/profile", userIdCookie, readall);
 
 // Route to edit an existing home_structure
