@@ -26,7 +26,7 @@ const readall = async (req, res, next) => {
   try {
     // Fetch a specific home_structure from the database based on the provided ID
     const homeStructure = await tables.home_structure.readUserStructure(
-      req.params.id
+      req.user
     );
 
     // If the home_structure is not found, respond with HTTP 404 (Not Found)

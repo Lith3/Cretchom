@@ -85,7 +85,7 @@ function NavMenu() {
               </NavLink>
             </div>
             <div className="navMenu-item">
-              <NavLink to={`/profil/${auth.user.sub}`} className="linkItem">
+              <NavLink to="/profil" className="linkItem">
                 Profil
               </NavLink>
             </div>

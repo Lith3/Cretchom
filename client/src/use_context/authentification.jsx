@@ -17,19 +17,18 @@ function AuthentificationProvider({ children }) {
       if (response.status === 200) {
         const data = await response.json();
         return setAuth(data);
-      } 
-      return setAuth(false);
       }
-    catch (error) {
+      return setAuth(false);
+    } catch (error) {
       return console.error("Error fetching data:", error);
-    }}
+    }
+  };
 
   useEffect(() => {
     fetchData();
   }, [update]);
 
-
-  const value = useMemo(() => ({ auth, update, setUpdate}), [auth, update]);
+  const value = useMemo(() => ({ auth, update, setUpdate }), [auth, update]);
 
   return (
     <AuthentificationContext.Provider value={value}>

@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext, useReducer } from "react";
 import { useLoaderData, useParams, Link } from "react-router-dom";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 import styles from "./ProfilePage.module.css";
 import ProfileHeader from "../../components/profile/profile_header/ProfileHeader";
@@ -118,7 +118,7 @@ function ProfilePage() {
     const fetchAnimals = async () => {
       if (auth !== null && auth !== false && auth.user.hasAnimals === true) {
         try {
-          const response = await fetch(`${URL}animal/${id}`);
+          const response = await fetch(`${URL}animal/${state.customer.id}`);
           const data = await response.json();
           setAnimalData(data);
         } catch (err) {
@@ -127,7 +127,7 @@ function ProfilePage() {
       }
     };
     fetchAnimals();
-  }, [URL, id, auth, updateAnimals]);
+  }, [URL, auth, state.customer.id, updateAnimals]);
 
   // function to delete user's animals
   const handleDeleteAnimals = async (animalId, animalName) => {
