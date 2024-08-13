@@ -11,6 +11,10 @@ describe("Routes", () => {
     const res = await request(app).get("/api/user/1");
     expect(res.statusCode).toBe(401);
   });
+  it("should return 401 for /homestructure/profile route", async () => {
+    const res = await request(app).get("/api/homestructure/profile");
+    expect(res.statusCode).toBe(401);
+  });
 
   it("should return 200 for /homestructure route", async () => {
     const res = await request(app).get(

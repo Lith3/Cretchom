@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { toast } from "react-toastify";
 import PropTypes from "prop-types";
@@ -20,13 +20,12 @@ function ProfileHeader({
   const { update, setUpdate } = useContext(AuthentificationContext);
   const { avatar } = customer;
   const navigate = useNavigate();
-  const { id } = useParams();
   const URL = import.meta.env.VITE_API_URL;
 
   // Delete profile
-  const deleteprofile = async () => {
+  const deleteProfile = async () => {
     try {
-      const response = await fetch(`${URL}user/${id}`, {
+      const response = await fetch(`${URL}user`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -90,7 +89,7 @@ function ProfileHeader({
             {isEditMode === false && (
               <DeleteProfile
                 text="Êtes vous sur de vouloir supprimer votre compte ?"
-                deleteOnClick={deleteprofile}
+                deleteOnClick={deleteProfile}
               />
             )}
           </div>
