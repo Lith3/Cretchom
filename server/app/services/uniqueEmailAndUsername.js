@@ -7,7 +7,7 @@ const uniqueEmailandUsername = async (req, res, next) => {
 
   if (uniqueEmail > 0) {
     return res.status(409).json({
-      validationErrors: [{ message: "Cette adresse mail est déjà utilisé" }],
+      validationErrors: [{ message: "Cette adresse mail est déjà utilisée" }],
     });
   }
   if (uniqueUsername > 0) {

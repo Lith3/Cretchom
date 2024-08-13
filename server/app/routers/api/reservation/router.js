@@ -8,7 +8,7 @@ const router = express.Router();
 const {
   read,
   add,
-  received,
+  readReceived,
   edit,
 } = require("../../../controllers/reservationActions");
 
@@ -20,7 +20,7 @@ const userIdCookie = require("../../../services/userIdCookie");
 
 router.get("/", userIdCookie, read);
 
-router.get("/received", userIdCookie, received);
+router.get("/received", userIdCookie, readReceived);
 
 router.put("/status", userIdCookie, edit, newNotification);
 
