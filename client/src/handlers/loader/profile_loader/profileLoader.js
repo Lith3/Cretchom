@@ -3,9 +3,9 @@ import { toast } from "react-toastify";
 
 const URL = import.meta.env.VITE_API_URL;
 
-const profileLoader = async ({ params }) => {
+const profileLoader = async () => {
   try {
-    const response = await fetch(`${URL}homestructure/${params.id}`, {
+    const response = await fetch(`${URL}homestructure/profile`, {
       method: "GET",
       credentials: "include",
     });

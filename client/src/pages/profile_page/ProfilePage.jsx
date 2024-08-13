@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext, useReducer } from "react";
-import { useLoaderData, useParams, Link } from "react-router-dom";
-import { toast } from 'react-toastify';
+import { useLoaderData, Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import styles from "./ProfilePage.module.css";
 import ProfileHeader from "../../components/profile/profile_header/ProfileHeader";
@@ -13,7 +13,6 @@ import DeleteProfile from "../../components/profile/profile_header/delete_profil
 
 function ProfilePage() {
   const customerdata = useLoaderData();
-  const { id } = useParams();
   const { auth, update, setUpdate } = useContext(AuthentificationContext);
   const [animalData, setAnimalData] = useState([]);
   const [updateAnimals, setUpdateAnimals] = useState(false);
@@ -118,7 +117,7 @@ function ProfilePage() {
     const fetchAnimals = async () => {
       if (auth !== null && auth !== false && auth.user.hasAnimals === true) {
         try {
-          const response = await fetch(`${URL}animal/${id}`);
+          const response = await fetch(`${URL}animal/${state.customer.id}`);
           const data = await response.json();
           setAnimalData(data);
         } catch (err) {
@@ -127,7 +126,7 @@ function ProfilePage() {
       }
     };
     fetchAnimals();
-  }, [URL, id, auth, updateAnimals]);
+  }, [URL, auth, state.customer.id, updateAnimals]);
 
   // function to delete user's animals
   const handleDeleteAnimals = async (animalId, animalName) => {
@@ -272,7 +271,10 @@ function ProfilePage() {
           </ul>
         )}
 
-        <Link to={`/formulaire-animal/${id}`} className={styles.addLink}>
+        <Link
+          to={`/formulaire-animal/${customerdata.id}`}
+          className={styles.addLink}
+        >
           Ajouter des animaux
         </Link>
       </ProfileSection>
@@ -366,7 +368,10 @@ function ProfilePage() {
             )}
           </>
         ) : (
-          <Link to={`/inscription_accueil/${id}`} className={styles.addLink}>
+          <Link
+            to={`/inscription_accueil/${customerdata.id}`}
+            className={styles.addLink}
+          >
             Devenir structure d'accueil
           </Link>
         )}

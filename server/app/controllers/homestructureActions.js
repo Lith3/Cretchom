@@ -25,16 +25,14 @@ const browse = async (req, res, next) => {
 const readall = async (req, res, next) => {
   try {
     // Fetch a specific home_structure from the database based on the provided ID
-    const homeStructure = await tables.home_structure.readUserStructure(
-      req.params.id
-    );
+    const user = await tables.home_structure.readUserStructure(req.user);
 
     // If the home_structure is not found, respond with HTTP 404 (Not Found)
     // Otherwise, respond with the home_structure in JSON format
-    if (homeStructure === null || homeStructure === undefined) {
+    if (user === null || user === undefined) {
       res.sendStatus(404);
     } else {
-      res.status(200).json(homeStructure);
+      res.status(200).json(user);
     }
   } catch (err) {
     // Pass any errors to the error-handling middleware

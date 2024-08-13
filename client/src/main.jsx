@@ -48,7 +48,7 @@ const router = createBrowserRouter([
         element: <SearchPage />,
       },
       {
-        path: "/profil/:id",
+        path: "/profil",
         element: <ProfilePage />,
         loader: profileLoader,
       },

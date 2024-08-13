@@ -26,6 +26,7 @@ const updateUserHomeStructure = require("../../../services/updateUserHomeStructu
 
 const checkIsHomeStructure = require("../../../services/checkIsHomeStructure");
 
+const userIdCookie = require("../../../services/userIdCookie");
 
 // Route to get a list of home_structure
 router.get("/", browse);
@@ -33,14 +34,20 @@ router.get("/", browse);
 // Route to get a specific user and home_structure by ID
 router.get("/single/:id", read);
 
-// Route to get a specific home_structure by ID
-router.get("/:id", deniedAccess, readall);
+// Route to get a specific home_structure and user by ID
+router.get("/profile", userIdCookie, readall);
 
 // Route to edit an existing home_structure
 router.put("/:id", uniqueEmailandUsername, updateUserHomeStructure, edit);
 
 // Route to add a new home_structure
-router.post("/:id", validateHomeStructure, deniedAccess, checkIsHomeStructure, add);
+router.post(
+  "/:id",
+  validateHomeStructure,
+  deniedAccess,
+  checkIsHomeStructure,
+  add
+);
 
 // Route to edit an existing home_structure
 router.delete("/:id", deniedAccess, destroy);
