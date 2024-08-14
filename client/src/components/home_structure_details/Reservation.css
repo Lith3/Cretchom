@@ -147,8 +147,8 @@
     margin-bottom: 15%;
     flex-direction: column;
     justify-content: space-between;
-    height: 8vh;
-    margin: 5% 0 13% 0;
+    height: auto;
+    margin: 5% 0 5% 0;
   }
   .reservationInput {
     padding: 0.7em;
