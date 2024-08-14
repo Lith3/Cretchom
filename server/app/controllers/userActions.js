@@ -90,7 +90,7 @@ const destroy = async (req, res, next) => {
   try {
     // Delete the user from the database
 
-    await tables.user.delete(req.params.id);
+    await tables.user.delete(req.user);
 
     // Respond with HTTP 204 (No Content)
     res.clearCookie("cretchomCookie");

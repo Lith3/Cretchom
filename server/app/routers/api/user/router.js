@@ -26,6 +26,8 @@ const {
 } = require("../../../services/validateUser");
 const uniqueEmailandUsername = require("../../../services/uniqueEmailAndUsername");
 
+const userIdCookie = require("../../../services/userIdCookie");
+
 // Route to get a specific user by ID
 router.get("/:id", deniedAccess, read);
 
@@ -43,7 +45,7 @@ router.post("/login", validateLogin, checkLog);
 router.post("/logout", disconect);
 
 // Route to delete an existing user
-router.delete("/:id", deniedAccess, destroy);
+router.delete("/", userIdCookie, destroy);
 
 /* ************************************************************************* */
 
