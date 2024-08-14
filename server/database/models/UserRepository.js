@@ -115,29 +115,22 @@ class UserRepository extends AbstractRepository {
 
   async delete(id) {
     // Execute the SQL DELETE query to delete a specific user
-    const [notification] = await this.database.query(
+    await this.database.query(
       "DELETE notification FROM notification JOIN reservation ON notification.reservation_id = reservation.id JOIN home_structure ON home_structure.id = reservation.home_structure_id JOIN animal ON reservation.animal_id = animal.id WHERE notification.user_id = ?  OR animal.user_id = ? OR home_structure.user_id = ?;",
       [id, id, id]
     );
 
-    const [reservation] = await this.database.query(
+    await this.database.query(
       "DELETE reservation FROM reservation JOIN home_structure ON reservation.home_structure_id = home_structure.id JOIN animal ON reservation.animal_id = animal.id WHERE home_structure.user_id = ? OR animal.user_id = ?",
       [id, id]
     );
 
-    const [animal] = await this.database.query(
-      `delete from animal where user_id = ?`,
-      [id]
-    );
-    const [homeStructure] = await this.database.query(
-      "delete from home_structure where user_id = ?",
-      [id]
-    );
+    await this.database.query(`delete from animal where user_id = ?`, [id]);
+    await this.database.query("delete from home_structure where user_id = ?", [
+      id,
+    ]);
 
-    const [anim] = await this.database.query(
-      `delete from animal where user_id = ?`,
-      [id]
-    );
+    await this.database.query(`delete from animal where user_id = ?`, [id]);
 
     const [user] = await this.database.query(
       `delete from ${this.table} where id = ?`,
@@ -145,14 +138,7 @@ class UserRepository extends AbstractRepository {
     );
 
     // Return how many rows were affected
-    return [
-      user.affectedRows,
-      anim.affectedRows,
-      homeStructure.affectedRows,
-      animal.affectedRows,
-      reservation.affectedRows,
-      notification.affectedRows,
-    ];
+    return [user.affectedRows];
   }
 
   async login(mail) {
