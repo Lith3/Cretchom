@@ -33,12 +33,17 @@ const phoneNumber = Joi.string()
   });
 const location = Joi.string().min(3).max(55).required();
 const mail = Joi.string().email().required();
-const password = Joi.string().pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&:;ù#àâäéèêëîïôöùûüÿç])[A-Za-z\d@$!%*?&:;ù#àâäéèêëîïôöùûüÿç]{12,}$/).min(12).required();
+const password = Joi.string()
+  .pattern(
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&:;ù#àâäéèêëîïôöùûüÿç])[A-Za-z\d@$!%*?&:;ù#àâäéèêëîïôöùûüÿç]{12,}$/
+  )
+  .min(12)
+  .required();
 const description = Joi.string().min(0).max(800);
 const avatar = Joi.string().min(0).max(254);
 // Schema of SingUp form
 
-const signInSchema = Joi.object({
+const signUpSchema = Joi.object({
   lastname,
   firstname,
   username,
@@ -52,7 +57,7 @@ const signInSchema = Joi.object({
 // Validation of SingUp form :
 
 const validateSignup = (req, res, next) => {
-  const { error } = signInSchema.validate(req.body, { abortEarly: true });
+  const { error } = signUpSchema.validate(req.body, { abortEarly: true });
 
   if (error === undefined) {
     next();

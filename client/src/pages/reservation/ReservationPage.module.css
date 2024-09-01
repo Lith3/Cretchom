@@ -146,6 +146,5 @@ td {
   #reservationContainer {
     justify-content: flex-start;
     height: auto;
-    min-height: 100px;
   }
 }

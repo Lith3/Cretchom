@@ -54,13 +54,12 @@ function SignUp() {
       if (response.status === 201) {
         const newData = await response.json();
         const userId = newData.insertId;
+        toast.success("Votre compte à bien été créé");
 
         setUpdate(!update);
         if (buttonValue === "structure") {
-          toast.success("Votre compte à bien été créé");
           return navigate(`/inscription_accueil/${userId}`);
         }
-        toast.success("Votre compte à bien été créé");
         return navigate(`/formulaire-animal/${userId}`);
       }
 
