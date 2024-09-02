@@ -83,7 +83,7 @@ function SignUp() {
               type="text"
               name="lastname"
               minLength={2}
-              maxLength={55}
+              maxLength={45}
               required
             />
           </div>
@@ -96,7 +96,7 @@ function SignUp() {
               type="text"
               name="firstname"
               minLength={2}
-              maxLength={55}
+              maxLength={50}
               required
             />
           </div>
