@@ -5,7 +5,7 @@ const Joi = require("joi");
 const lastname = Joi.string()
   .pattern(/^[a-zA-ZÀ-ÿ\s']+$/)
   .min(2)
-  .max(55)
+  .max(45)
   .required()
   .messages({
     "string.pattern.base":
@@ -14,7 +14,7 @@ const lastname = Joi.string()
 const firstname = Joi.string()
   .pattern(/^[a-zA-ZÀ-ÿ\s']+$/)
   .min(2)
-  .max(55)
+  .max(50)
   .required()
   .messages({
     "string.pattern.base":
